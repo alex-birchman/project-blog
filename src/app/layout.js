@@ -1,47 +1,54 @@
-import React from 'react';
+import React from "react";
+import { Work_Sans, Spline_Sans_Mono } from "next/font/google";
+import clsx from "clsx";
+
 import {
-  Work_Sans,
-  Spline_Sans_Mono,
-} from 'next/font/google';
-import clsx from 'clsx';
+    LIGHT_TOKENS,
+    DARK_TOKENS,
+    BLOG_TITLE,
+    BLOG_DESCRIPTION,
+} from "@/constants";
 
-import { LIGHT_TOKENS, DARK_TOKENS } from '@/constants';
-
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import './styles.css';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import "./styles.css";
 
 const mainFont = Work_Sans({
-  subsets: ['latin'],
-  display: 'fallback',
-  weight: 'variable',
-  variable: '--font-family',
+    subsets: ["latin"],
+    display: "fallback",
+    weight: "variable",
+    variable: "--font-family",
 });
 const monoFont = Spline_Sans_Mono({
-  subsets: ['latin'],
-  display: 'fallback',
-  weight: 'variable',
-  variable: '--font-family-mono',
+    subsets: ["latin"],
+    display: "fallback",
+    weight: "variable",
+    variable: "--font-family-mono",
 });
 
-function RootLayout({ children }) {
-  // TODO: Dynamic theme depending on user preference
-  const theme = 'light';
+export const metadata = {
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
+};
 
-  return (
-    <html
-      lang="en"
-      className={clsx(mainFont.variable, monoFont.variable)}
-      data-color-theme={theme}
-      style={theme === 'light' ? LIGHT_TOKENS : DARK_TOKENS}
-    >
-      <body>
-        <Header theme={theme} />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
-  );
+function RootLayout({ children }) {
+    // TODO: Dynamic theme depending on user preference
+    const theme = "light";
+
+    return (
+        <html
+            lang="en"
+            className={clsx(mainFont.variable, monoFont.variable)}
+            data-color-theme={theme}
+            style={theme === "light" ? LIGHT_TOKENS : DARK_TOKENS}
+        >
+            <body>
+                <Header theme={theme} />
+                <main>{children}</main>
+                <Footer />
+            </body>
+        </html>
+    );
 }
 
 export default RootLayout;
